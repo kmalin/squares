@@ -1,6 +1,6 @@
 using SquareApi.BusinessDomain;
 
-namespace SquareApi.Tests;
+namespace SquareApi.Tests.BusinessDomain;
 
 public class SquareTest
 {
