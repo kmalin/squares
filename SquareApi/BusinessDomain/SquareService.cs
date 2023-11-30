@@ -10,7 +10,6 @@ public class SquareService : ISquareService
     private readonly ISquareRepository _squareRepository;
     private readonly ISquareDetector _squareDetector;
 
-
     public SquareService(ILogger<SquareService> logger,
         IPointRepository pointRepository,
         ISquareRepository squareRepository,
@@ -25,6 +24,8 @@ public class SquareService : ISquareService
     /// <inheritdoc/>
     public async Task SetList(IList<Point> list)
     {
+        // Operation should be synchronized against other point list operations.
+        // This was not implemented due to time constraints.
         _logger.LogInformation("Importing a list of points.");
         await _pointRepository.SetList(list);
         await DetectSquares();
@@ -33,6 +34,8 @@ public class SquareService : ISquareService
     /// <inheritdoc/>
     public async Task AddPoint(Point point)
     {
+        // Operation should be synchronized against other point list operations.
+        // This was not implemented due to time constraints.
         _logger.LogInformation("Adding a point.");
         await _pointRepository.AddPoint(point);
         await DetectSquares();
@@ -41,6 +44,8 @@ public class SquareService : ISquareService
     /// <inheritdoc/>
     public async Task DeletePoint(Point point)
     {
+        // Operation should be synchronized against other point list operations.
+        // This was not implemented due to time constraints.
         _logger.LogInformation("Deleting a point.");
         await _pointRepository.DeletePoint(point);
         await DetectSquares();
@@ -59,9 +64,9 @@ public class SquareService : ISquareService
     /// <inheritdoc/>
     public Task<IList<Square>> GetSquares()
     {
+        // Accessing squares should be synchronized against other point list operations.
+        // This was not implemented due to time constraints.
         _logger.LogInformation("Getting a list of squares.");
-        // Here we could either lock for more consistent results.
-        // Or keep in un-locked for faster results.
         return _squareRepository.GetAll();
     }
 }

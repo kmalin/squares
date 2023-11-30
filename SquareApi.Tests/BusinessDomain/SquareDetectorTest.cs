@@ -1,6 +1,6 @@
 using SquareApi.BusinessDomain;
 
-namespace SquareApi.Tests;
+namespace SquareApi.Tests.BusinessDomain;
 
 public class SquareDetectorTest
 {
@@ -16,6 +16,17 @@ public class SquareDetectorTest
     private readonly Point _j = new() { X = 1, Y = 0 };
     private readonly Point _k = new() { X = 0, Y = -1 };
     private readonly Point _l = new() { X = -1, Y = 0 };
+
+    [Fact]
+    public void DetectSquares_Should_HandleEmptyListsGracefully()
+    {
+        var sut = new SquareDetector();
+
+        // Act
+        var squares = sut.DetectSquares(new List<Point>());
+
+        Assert.Empty(squares);
+    }
 
     [Fact]
     public void DetectSquares_Should_HandlePointDuplicationsGracefully()
